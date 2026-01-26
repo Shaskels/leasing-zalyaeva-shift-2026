@@ -2,13 +2,71 @@ package com.example.leasing_zalyaeva_shift_2026.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme()
+private val DarkColorScheme = LeasingColors(
+    backgroundPrimary = BackgroundPrimary,
+    backgroundSecondary = BackgroundSecondary,
+    backgroundTertiary = BackgroundTertiary,
+    backgroundDisable = BackgroundDisable,
+    borderExtraLight = BorderExtraLight,
+    borderLight = BorderLight,
+    borderMedium = BorderMedium,
+    textInvert = TextInvert,
+    textPrimary = TextPrimary,
+    textSecondary = TextSecondary,
+    textTertiary = TextTertiary,
+    textQuartenery = TextQuartenery,
+    textError = TextError,
+    indicatorWhite = IndicatorWhite,
+    indicatorLight = IndicatorLight,
+    indicatorMedium = IndicatorMedium,
+    indicatorNormal = IndicatorNormal,
+    indicatorError = IndicatorError,
+    indicatorAttention = IndicatorAttention,
+    indicatorPositive = IndicatorPositive,
+    backgroundBrand = BackgroundBrand,
+    backgroundBrandPrimary = BackgroundBrandPrimary,
+    backgroundHoverPrimary = BackgroundHoverPrimary,
+    backgroundBrandExtraLight = BackgroundBrandExtraLight,
+    textBrandDisabled = TextBrandDisabled,
+    indicatorFocused = IndicatorFocused,
+    indicatorFocusedAlternative = IndicatorFocusedAlternative
+)
 
-private val LightColorScheme = lightColorScheme()
+private val LightColorScheme = LeasingColors(
+    backgroundPrimary = BackgroundPrimary,
+    backgroundSecondary = BackgroundSecondary,
+    backgroundTertiary = BackgroundTertiary,
+    backgroundDisable = BackgroundDisable,
+    borderExtraLight = BorderExtraLight,
+    borderLight = BorderLight,
+    borderMedium = BorderMedium,
+    textInvert = TextInvert,
+    textPrimary = TextPrimary,
+    textSecondary = TextSecondary,
+    textTertiary = TextTertiary,
+    textQuartenery = TextQuartenery,
+    textError = TextError,
+    indicatorWhite = IndicatorWhite,
+    indicatorLight = IndicatorLight,
+    indicatorMedium = IndicatorMedium,
+    indicatorNormal = IndicatorNormal,
+    indicatorError = IndicatorError,
+    indicatorAttention = IndicatorAttention,
+    indicatorPositive = IndicatorPositive,
+    backgroundBrand = BackgroundBrand,
+    backgroundBrandPrimary = BackgroundBrandPrimary,
+    backgroundHoverPrimary = BackgroundHoverPrimary,
+    backgroundBrandExtraLight = BackgroundBrandExtraLight,
+    textBrandDisabled = TextBrandDisabled,
+    indicatorFocused = IndicatorFocused,
+    indicatorFocusedAlternative = IndicatorFocusedAlternative
+)
 
 @Composable
 fun Leasingzalyaevashift2026Theme(
@@ -20,9 +78,51 @@ fun Leasingzalyaevashift2026Theme(
         else -> LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(LocalLeasingColors provides colorScheme) {
+        MaterialTheme(
+            typography = Typography,
+            content = content
+        )
+    }
+}
+
+object LeasingTheme {
+    val colors: LeasingColors
+        @Composable
+        get() = LocalLeasingColors.current
+}
+
+@Immutable
+data class LeasingColors(
+    val backgroundPrimary: Color,
+    val backgroundSecondary: Color,
+    val backgroundTertiary: Color,
+    val backgroundDisable: Color,
+    val borderExtraLight: Color,
+    val borderLight: Color,
+    val borderMedium: Color,
+    val textInvert: Color,
+    val textPrimary: Color,
+    val textSecondary: Color,
+    val textTertiary: Color,
+    val textQuartenery: Color,
+    val textError: Color,
+    val indicatorWhite: Color,
+    val indicatorLight: Color,
+    val indicatorMedium: Color,
+    val indicatorNormal: Color,
+    val indicatorError: Color,
+    val indicatorAttention: Color,
+    val indicatorPositive: Color,
+    val backgroundBrand: Color,
+    val backgroundBrandPrimary: Color,
+    val backgroundHoverPrimary: Color,
+    val backgroundBrandExtraLight: Color,
+    val textBrandDisabled: Color,
+    val indicatorFocused: Color,
+    val indicatorFocusedAlternative: Color,
+)
+
+private val LocalLeasingColors = staticCompositionLocalOf<LeasingColors> {
+    error("No ColorPalette provided")
 }
