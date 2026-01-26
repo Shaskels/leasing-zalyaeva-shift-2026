@@ -7,6 +7,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 
 private val DarkColorScheme = LeasingColors(
     backgroundPrimary = BackgroundPrimary,
@@ -78,9 +79,9 @@ fun Leasingzalyaevashift2026Theme(
         else -> LightColorScheme
     }
 
+    CompositionLocalProvider(LocalLeasingType provides Typography) { }
     CompositionLocalProvider(LocalLeasingColors provides colorScheme) {
         MaterialTheme(
-            typography = Typography,
             content = content
         )
     }
@@ -90,6 +91,10 @@ object LeasingTheme {
     val colors: LeasingColors
         @Composable
         get() = LocalLeasingColors.current
+    val typography: LeasingType
+        @Composable
+        get() = LocalLeasingType.current
+
 }
 
 @Immutable
@@ -123,6 +128,13 @@ data class LeasingColors(
     val indicatorFocusedAlternative: Color,
 )
 
+data class LeasingType(
+    val tabbar: TextStyle
+)
+
+private val LocalLeasingType = staticCompositionLocalOf<LeasingType> {
+    error("No Type provided")
+}
 private val LocalLeasingColors = staticCompositionLocalOf<LeasingColors> {
     error("No ColorPalette provided")
 }
