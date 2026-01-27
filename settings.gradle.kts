@@ -22,4 +22,7 @@ dependencyResolutionManagement {
 rootProject.name = "leasing-zalyaeva-shift-2026"
 include(":app")
 include(":component:uicomponent")
+include(":feature:carList")
+include(":shared:car")
+include(":shared:network")
  
