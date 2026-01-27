@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.shared.car"
+    namespace = "com.example.shared.network"
     compileSdk {
         version = release(36)
     }
