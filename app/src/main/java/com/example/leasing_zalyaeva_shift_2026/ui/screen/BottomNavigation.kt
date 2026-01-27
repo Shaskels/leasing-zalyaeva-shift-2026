@@ -50,7 +50,7 @@ fun BottomNavigation(
 @Composable
 private fun getIcon(option: NavigationOptions): Painter =
     when (option) {
-        NavigationOptions.AVTO -> painterResource(R.drawable.car)
+        NavigationOptions.CAR -> painterResource(R.drawable.car)
 
         NavigationOptions.ORDERS -> painterResource(R.drawable.time)
 
@@ -60,7 +60,7 @@ private fun getIcon(option: NavigationOptions): Painter =
 @Composable
 private fun getLabel(option: NavigationOptions): String = stringResource(
     when (option) {
-        NavigationOptions.AVTO -> R.string.avto_tab
+        NavigationOptions.CAR -> R.string.avto_tab
         NavigationOptions.ORDERS -> R.string.order_tab
         NavigationOptions.PROFILE -> R.string.profile_tab
     }
