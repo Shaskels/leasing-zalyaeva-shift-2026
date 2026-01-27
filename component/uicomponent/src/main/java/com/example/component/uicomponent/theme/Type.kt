@@ -5,9 +5,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.leasing_zalyaeva_shift_2026.R
-
-// Set of Material typography styles to start with
+import com.example.component.uicomponent.R
 
 val interFamily = FontFamily(
     Font(R.font.inter_24pt_regular, FontWeight.W400)
