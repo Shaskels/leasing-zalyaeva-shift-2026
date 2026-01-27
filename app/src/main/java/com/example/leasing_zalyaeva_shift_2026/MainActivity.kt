@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.leasing_zalyaeva_shift_2026.ui.screen.MainScreen
 import com.example.leasing_zalyaeva_shift_2026.ui.theme.Leasingzalyaevashift2026Theme
 
 class MainActivity : ComponentActivity() {
@@ -12,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Leasingzalyaevashift2026Theme {
-
+                MainScreen()
             }
         }
     }
