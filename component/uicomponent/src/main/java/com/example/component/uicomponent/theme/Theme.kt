@@ -36,7 +36,8 @@ private val DarkColorScheme = LeasingColors(
     backgroundBrandExtraLight = BackgroundBrandExtraLight,
     textBrandDisabled = TextBrandDisabled,
     indicatorFocused = IndicatorFocused,
-    indicatorFocusedAlternative = IndicatorFocusedAlternative
+    indicatorFocusedAlternative = IndicatorFocusedAlternative,
+    iconPrimary = IconPrimary
 )
 
 private val LightColorScheme = LeasingColors(
@@ -66,7 +67,8 @@ private val LightColorScheme = LeasingColors(
     backgroundBrandExtraLight = BackgroundBrandExtraLight,
     textBrandDisabled = TextBrandDisabled,
     indicatorFocused = IndicatorFocused,
-    indicatorFocusedAlternative = IndicatorFocusedAlternative
+    indicatorFocusedAlternative = IndicatorFocusedAlternative,
+    iconPrimary = IconPrimary
 )
 
 @Composable
@@ -126,10 +128,14 @@ data class LeasingColors(
     val textBrandDisabled: Color,
     val indicatorFocused: Color,
     val indicatorFocusedAlternative: Color,
+    val iconPrimary: Color,
 )
 
 data class LeasingType(
-    val tabbar: TextStyle
+    val tabbar: TextStyle,
+    val button: TextStyle,
+    val paragraph16Regular: TextStyle,
+    val titleH2: TextStyle
 )
 
 private val LocalLeasingType = staticCompositionLocalOf<LeasingType> {
