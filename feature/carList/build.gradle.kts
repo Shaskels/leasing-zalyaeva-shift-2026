@@ -31,13 +31,18 @@ kotlin{
 
 dependencies {
     implementation(project(":shared:car"))
+    implementation(project(":shared:network"))
+    implementation(project(":component:uicomponent"))
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.http)
+    implementation(libs.okhttp)
 
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.paging.runtime)
 
     implementation(libs.hilt.android.runtime)
-    implementation(libs.hilt.android.compiler)
-    ksp(libs.androidx.hilt.compiler)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.compose)
 
     implementation(libs.androidx.core.ktx)

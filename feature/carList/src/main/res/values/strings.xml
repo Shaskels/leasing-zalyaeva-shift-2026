@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">leasing-zalyaeva-shift-2026</string>
+    <string name="cars">Автомобили</string>
+    <string name="search">Поиск</string>
+    <string name="book_dates">Даты аренды</string>
+    <string name="filters">Фильтры</string>
+    <string name="on_14_days">за 14 дней</string>
+</resources>
