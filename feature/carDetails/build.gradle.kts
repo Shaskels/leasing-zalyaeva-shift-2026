@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.carList"
+    namespace = "com.example.feature.carDetails"
     compileSdk {
         version = release(36)
     }

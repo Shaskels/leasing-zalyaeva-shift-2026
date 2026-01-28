@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CarDetailsResponse (
     val success: Boolean,
-    val reason: String,
+    val reason: String?,
     val data: CarResponse,
 )

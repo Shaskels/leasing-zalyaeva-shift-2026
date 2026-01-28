@@ -140,6 +140,7 @@ data class LeasingType(
     val paragraph16Medium: TextStyle,
     val paragraph12Regular: TextStyle,
     val paragraph14Regular: TextStyle,
+    val titleH3: TextStyle
 )
 
 private val LocalLeasingType = staticCompositionLocalOf<LeasingType> {
