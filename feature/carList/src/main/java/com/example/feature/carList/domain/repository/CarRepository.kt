@@ -1,4 +1,4 @@
-package com.example.shared.car.domain.repository
+package com.example.feature.carList.domain.repository
 
 import androidx.paging.PagingData
 import com.example.shared.car.domain.entity.Car

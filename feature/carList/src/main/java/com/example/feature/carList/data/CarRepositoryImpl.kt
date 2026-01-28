@@ -1,13 +1,14 @@
-package com.example.shared.car.data
+package com.example.feature.carList.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.example.feature.carList.domain.repository.CarRepository
+import com.example.shared.car.data.CarService
+import com.example.shared.car.data.model.CarResponse
+import com.example.shared.car.data.toDomainCar
 import com.example.shared.car.domain.entity.Car
-import com.example.shared.car.domain.repository.CarRepository
-import com.example.shared.network.data.remote.CarService
-import com.example.shared.network.data.remote.model.CarResponse
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -23,9 +24,8 @@ class CarRepositoryImpl @Inject constructor(private val carService: CarService):
             config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
             pagingSourceFactory = {
                 CarPagingSource(
-                    loadData = { key ->
-                        carService.getCars(query, key)
-                    }
+                    api = carService,
+                    query = query,
                 )
             }
         )

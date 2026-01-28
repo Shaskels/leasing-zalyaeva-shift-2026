@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -8,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.shared.network"
+    namespace = "com.example.leasing_zalyaeva_shift_2026.shared.network"
     compileSdk {
         version = release(36)
     }
@@ -34,12 +35,12 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.hilt.android.runtime)
-    implementation(libs.hilt.android.compiler)
-    ksp(libs.androidx.hilt.compiler)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.okhttp)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter)
+    implementation(libs.okHttp.logging.interceptor)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

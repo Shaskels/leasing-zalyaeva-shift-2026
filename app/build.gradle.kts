@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -21,6 +23,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -31,6 +34,7 @@ android {
         }
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }
@@ -42,11 +46,16 @@ kotlin{
 dependencies {
 
     implementation(project(":component:uicomponent"))
+    implementation(project(":feature:carList"))
 
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.material3.adaptive.navigation3)
+
+    implementation(libs.hilt.android.runtime)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.compose)
 
     implementation(libs.kotlinx.serialization.json)
 

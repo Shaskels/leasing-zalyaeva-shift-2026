@@ -39,9 +39,12 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
 
     implementation(libs.hilt.android.runtime)
-    implementation(libs.hilt.android.compiler)
-    ksp(libs.androidx.hilt.compiler)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.compose)
+
+    implementation(libs.okhttp)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

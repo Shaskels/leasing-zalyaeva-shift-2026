@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.leasing_zalyaeva_shift_2026.ui.theme.LeasingTheme
+import com.example.component.uicomponent.theme.LeasingTheme
 
 @Composable
 fun CustomButton(
@@ -19,9 +19,9 @@ fun CustomButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.height(50.dp),
+        modifier = modifier.height(56.dp),
         enabled = enabled,
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(16.dp),
         colors = ButtonColors(
             containerColor = LeasingTheme.colors.backgroundBrandPrimary,
             contentColor = LeasingTheme.colors.textInvert,

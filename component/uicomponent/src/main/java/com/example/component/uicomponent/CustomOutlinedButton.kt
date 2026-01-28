@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.leasing_zalyaeva_shift_2026.ui.theme.LeasingTheme
+import com.example.component.uicomponent.theme.LeasingTheme
 
 @Composable
 fun CustomOutlinedButton(
@@ -21,9 +21,9 @@ fun CustomOutlinedButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.height(50.dp),
+        modifier = modifier.height(56.dp),
         enabled = enabled,
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(16.dp),
         border = BorderStroke(width = 1.dp, color = LeasingTheme.colors.borderLight),
         colors = ButtonColors(
             containerColor = Color.Transparent,

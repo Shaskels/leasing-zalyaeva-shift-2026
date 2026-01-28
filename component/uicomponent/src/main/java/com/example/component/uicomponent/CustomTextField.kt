@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
-import com.example.leasing_zalyaeva_shift_2026.ui.theme.LeasingTheme
+import com.example.component.uicomponent.theme.LeasingTheme
 
 @Composable
 fun CustomTextField(

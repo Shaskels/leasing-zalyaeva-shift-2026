@@ -7,7 +7,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.leasing_zalyaeva_shift_2026.ui.theme.LeasingTheme
+import com.example.component.uicomponent.theme.LeasingTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
