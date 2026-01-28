@@ -1,7 +1,9 @@
 package com.example.shared.car.data
 
+import com.example.shared.car.data.model.CarDetailsResponse
 import com.example.shared.car.data.model.PagedResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CarService {
@@ -12,4 +14,10 @@ interface CarService {
         @Query("page")
         page: Int
     ): PagedResponse
+
+    @GET("info/{carId}")
+    suspend fun getCar(
+        @Path("carId")
+        carId: String,
+    ): CarDetailsResponse
 }
