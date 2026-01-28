@@ -1,7 +1,7 @@
-package com.example.shared.car.di
+package com.example.feature.carList.di
 
-import com.example.shared.car.data.CarRepositoryImpl
-import com.example.shared.car.domain.repository.CarRepository
+import com.example.feature.carList.data.CarRepositoryImpl
+import com.example.feature.carList.domain.repository.CarRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

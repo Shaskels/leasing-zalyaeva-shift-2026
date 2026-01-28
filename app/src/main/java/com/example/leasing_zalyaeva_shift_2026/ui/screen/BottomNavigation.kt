@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.component.uicomponent.theme.LeasingTheme
 import com.example.leasing_zalyaeva_shift_2026.R
-import com.example.leasing_zalyaeva_shift_2026.ui.theme.LeasingTheme
 
 @Composable
 fun BottomNavigation(

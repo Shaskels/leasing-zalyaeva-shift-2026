@@ -1,5 +1,6 @@
 package com.example.leasing_zalyaeva_shift_2026.ui.screen
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -9,7 +10,8 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
-import com.example.leasing_zalyaeva_shift_2026.ui.theme.LeasingTheme
+import com.example.component.uicomponent.theme.LeasingTheme
+import com.example.feature.carList.ui.CarListScreen
 
 @Composable
 fun MainScreen() {
@@ -41,11 +43,14 @@ fun MainScreen() {
             }
         },
         containerColor = LeasingTheme.colors.backgroundPrimary,
+        contentWindowInsets = WindowInsets()
     ) { paddingValues ->
         NavDisplay(
             backStack = backStack,
             entryProvider = entryProvider {
-                entry<Route.CarList> {}
+                entry<Route.CarList> {
+                    CarListScreen()
+                }
 
                 entry<Route.Orders> { }
 

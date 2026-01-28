@@ -10,10 +10,13 @@ android {
         version = release(36)
     }
 
+
+
     defaultConfig {
         minSdk = 29
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -28,6 +31,10 @@ kotlin{
 }
 
 dependencies {
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.http)
+    implementation(libs.okhttp)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

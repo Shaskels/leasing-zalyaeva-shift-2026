@@ -1,4 +1,4 @@
-package com.example.leasing_zalyaeva_shift_2026.ui.theme
+package com.example.component.uicomponent.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -81,11 +81,12 @@ fun Leasingzalyaevashift2026Theme(
         else -> LightColorScheme
     }
 
-    CompositionLocalProvider(LocalLeasingType provides Typography) { }
-    CompositionLocalProvider(LocalLeasingColors provides colorScheme) {
-        MaterialTheme(
-            content = content
-        )
+    CompositionLocalProvider(LocalLeasingType provides Typography) {
+        CompositionLocalProvider(LocalLeasingColors provides colorScheme) {
+            MaterialTheme(
+                content = content
+            )
+        }
     }
 }
 
@@ -135,7 +136,10 @@ data class LeasingType(
     val tabbar: TextStyle,
     val button: TextStyle,
     val paragraph16Regular: TextStyle,
-    val titleH2: TextStyle
+    val titleH2: TextStyle,
+    val paragraph16Medium: TextStyle,
+    val paragraph12Regular: TextStyle,
+    val paragraph14Regular: TextStyle,
 )
 
 private val LocalLeasingType = staticCompositionLocalOf<LeasingType> {

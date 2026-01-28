@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">leasing-zalyaeva-shift-2026</string>
+    <string name="retry">Попробовать снова</string>
+    <string name="failed_to_load">Не удалось загрузить</string>
+</resources>

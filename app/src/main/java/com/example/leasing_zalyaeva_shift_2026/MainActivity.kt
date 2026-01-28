@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.component.uicomponent.theme.Leasingzalyaevashift2026Theme
 import com.example.leasing_zalyaeva_shift_2026.ui.screen.MainScreen
-import com.example.leasing_zalyaeva_shift_2026.ui.theme.Leasingzalyaevashift2026Theme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

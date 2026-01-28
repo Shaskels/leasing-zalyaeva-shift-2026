@@ -1,4 +1,4 @@
-package com.example.shared.network.data.remote.model
+package com.example.shared.car.data.model
 
 import kotlinx.serialization.Serializable
 

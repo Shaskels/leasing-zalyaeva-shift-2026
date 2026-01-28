@@ -1,4 +1,4 @@
-package com.example.leasing_zalyaeva_shift_2026.ui.theme
+package com.example.component.uicomponent.theme
 
 import androidx.compose.ui.graphics.Color
 
