@@ -1,5 +1,6 @@
 package com.example.feature.carList.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -29,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemKey
 import coil3.annotation.ExperimentalCoilApi
 import com.example.component.uicomponent.CustomDarkButton
 import com.example.component.uicomponent.CustomImage
@@ -43,7 +44,10 @@ import com.example.feature.carList.presentation.CarListViewModel
 import com.example.shared.car.domain.entity.Car
 
 @Composable
-fun CarListScreen(carListViewModel: CarListViewModel = hiltViewModel()) {
+fun CarListScreen(
+    onItemClick: (String) -> Unit,
+    carListViewModel: CarListViewModel = hiltViewModel()
+) {
 
     val query by carListViewModel.query.collectAsState()
     val carList = carListViewModel.cars.collectAsLazyPagingItems()
@@ -63,11 +67,6 @@ fun CarListScreen(carListViewModel: CarListViewModel = hiltViewModel()) {
                 .padding(paddingValues)
                 .padding(start = 16.dp, end = 16.dp, top = 24.dp),
         ) {
-            FiltersCard(
-                query = query,
-                onQueryChange = carListViewModel::onQueryChange
-            )
-
             PullToRefreshBox(
                 isRefreshing = false,
                 onRefresh = {
@@ -76,29 +75,33 @@ fun CarListScreen(carListViewModel: CarListViewModel = hiltViewModel()) {
                 state = pullToRefreshState,
                 modifier = Modifier.fillMaxSize()
             ) {
-                when (carList.loadState.refresh) {
-                    is LoadState.Error -> {
-                        Error(onRetryClick = carList::retry)
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(24.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxSize()
+                ) {
+                    item {
+                        FiltersCard(
+                            query = query,
+                            onQueryChange = carListViewModel::onQueryChange
+                        )
                     }
 
-                    is LoadState.Loading -> {
-                        Loading()
-                    }
+                    when (carList.loadState.refresh) {
+                        is LoadState.Error -> {
+                            item { Error(onRetryClick = carList::retry) }
+                        }
 
-                    else -> {
-                        LazyColumn(
-                            verticalArrangement = Arrangement.spacedBy(24.dp),
-                            modifier = Modifier
-                                .padding(horizontal = 16.dp)
-                                .fillMaxSize()
-                        ) {
+                        is LoadState.Loading -> {
+                            item { Loading() }
+                        }
+
+                        else -> {
                             items(
-                                count = carList.itemCount, key = carList.itemKey { it.id }
-                            ) { index ->
-                                val item = carList[index]
-                                if (item != null) {
-                                    CarListItem(item)
-                                }
+                                carList.itemSnapshotList.items, key = { it.id }
+                            ) { item ->
+                                CarListItem(item, onItemClick)
                             }
                         }
                     }
@@ -156,22 +159,26 @@ fun FiltersCard(query: String, onQueryChange: (String) -> Unit) {
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun CarListItem(car: Car) {
+fun CarListItem(car: Car, onItemClick: (String) -> Unit) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
             .fillMaxWidth()
+            .clickable(onClick = { onItemClick(car.id) })
+            .padding(vertical = 8.dp)
             .height(116.dp)
     ) {
         CustomImage(
-            url = car.media.first().url,
+            url = car.media.find { it.isCover }?.url ?: car.media.first().url,
             modifier = Modifier
                 .weight(1f)
         )
 
-        Column(Modifier
-            .weight(1f)
-            .fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxSize()
+        ) {
             Text(
                 car.name,
                 style = LeasingTheme.typography.paragraph16Medium,

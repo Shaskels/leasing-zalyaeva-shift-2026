@@ -62,7 +62,13 @@ val Typography = LeasingType(
         fontSize = 14.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp
+    ),
+    titleH3 = TextStyle(
+        fontFamily = interFamily,
+        fontWeight = FontWeight.W400,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.sp
     )
-
 )
 

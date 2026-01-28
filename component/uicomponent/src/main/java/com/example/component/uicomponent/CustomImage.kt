@@ -24,7 +24,7 @@ fun CustomImage(url: String, modifier: Modifier = Modifier) {
         imageLoader = initUntrustImageLoader(LocalContext.current),
         model = "https://shift-intensive.ru/api$url",
         contentDescription = null,
-        contentScale = ContentScale.FillBounds,
+        contentScale = ContentScale.FillWidth,
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
     )

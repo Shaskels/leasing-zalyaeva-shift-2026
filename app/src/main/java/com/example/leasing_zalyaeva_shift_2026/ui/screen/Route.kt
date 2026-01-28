@@ -14,4 +14,7 @@ sealed interface Route : NavKey {
 
     @Serializable
     data object Profile : Route
+
+    @Serializable
+    data class CarDetails(val carId: String): Route
 }

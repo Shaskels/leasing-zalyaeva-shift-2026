@@ -5,12 +5,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.component.uicomponent.theme.LeasingTheme
+import com.example.feature.carDetails.presentation.CarDetailsViewModel
+import com.example.feature.carDetails.ui.CarDetailsScreen
 import com.example.feature.carList.ui.CarListScreen
 
 @Composable
@@ -49,10 +52,29 @@ fun MainScreen() {
             backStack = backStack,
             entryProvider = entryProvider {
                 entry<Route.CarList> {
-                    CarListScreen()
+                    CarListScreen(onItemClick = {
+                        backStack.add(Route.CarDetails(it))
+                    })
                 }
 
-                entry<Route.Orders> { }
+                entry<Route.CarDetails> { route ->
+                    val viewModel = hiltViewModel(
+                        key = route.carId,
+                        creationCallback = { factory: CarDetailsViewModel.CarDetailsViewModelFactory ->
+                            factory.create(route.carId)
+                        }
+                    )
+                    CarDetailsScreen(
+                        carDetailsViewModel = viewModel,
+                        onBackClick = {
+                            backStack.removeAt(backStack.lastIndex)
+                        }
+                    )
+                }
+
+                entry<Route.Orders> {
+
+                }
 
                 entry<Route.Profile> { }
             },
@@ -71,6 +93,7 @@ private fun getSelectedTab(navKey: NavKey?): NavigationOptions? {
         is Route.CarList -> NavigationOptions.CAR
         is Route.Orders -> NavigationOptions.ORDERS
         is Route.Profile -> NavigationOptions.PROFILE
+        is Route.CarDetails -> NavigationOptions.CAR
         else -> null
     }
 }
