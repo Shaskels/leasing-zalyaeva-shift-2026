@@ -24,7 +24,7 @@ class CarListViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val cars = query.debounce(600).flatMapLatest { getCarsUseCase(it).cachedIn(viewModelScope) }
 
-    fun onQueryChange(query: String) {
+    fun search(query: String) {
         _query.value = query
     }
 }

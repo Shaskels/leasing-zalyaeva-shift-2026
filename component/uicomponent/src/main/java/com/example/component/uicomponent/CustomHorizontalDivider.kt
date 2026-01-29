@@ -8,9 +8,9 @@ import androidx.compose.ui.unit.dp
 import com.example.component.uicomponent.theme.LeasingTheme
 
 @Composable
-fun CustomHorizontalDivider() {
+fun CustomHorizontalDivider(modifier: Modifier = Modifier) {
     HorizontalDivider(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         thickness = 1.dp,
         color = LeasingTheme.colors.borderLight
     )

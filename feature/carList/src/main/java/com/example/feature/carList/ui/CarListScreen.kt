@@ -42,6 +42,7 @@ import com.example.component.uicomponent.theme.LeasingTheme
 import com.example.feature.carList.R
 import com.example.feature.carList.presentation.CarListViewModel
 import com.example.shared.car.domain.entity.Car
+import com.example.shared.car.domain.entity.getCover
 
 @Composable
 fun CarListScreen(
@@ -84,7 +85,7 @@ fun CarListScreen(
                     item {
                         FiltersCard(
                             query = query,
-                            onQueryChange = carListViewModel::onQueryChange
+                            onQueryChange = carListViewModel::search
                         )
                     }
 
@@ -159,17 +160,21 @@ fun FiltersCard(query: String, onQueryChange: (String) -> Unit) {
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun CarListItem(car: Car, onItemClick: (String) -> Unit) {
+fun CarListItem(
+    car: Car,
+    onItemClick: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clickable(onClick = { onItemClick(car.id) })
             .padding(vertical = 8.dp)
             .height(116.dp)
     ) {
         CustomImage(
-            url = car.media.find { it.isCover }?.url ?: car.media.first().url,
+            url = car.getCover(),
             modifier = Modifier
                 .weight(1f)
         )

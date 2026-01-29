@@ -13,3 +13,5 @@ data class Car (
     val steering: Steering,
     val rents: List<Rent>? = null
 )
+
+fun Car.getCover(): String = media.find { it.isCover }?.url ?: media.first().url
