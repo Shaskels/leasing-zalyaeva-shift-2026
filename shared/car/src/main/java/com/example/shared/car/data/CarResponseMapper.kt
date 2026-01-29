@@ -16,28 +16,28 @@ fun CarResponse.toDomainCar() =
     Car(
         id = id,
         name = name,
-        brand = this.convertBrand(),
+        brand = this.brand.convertBrand(),
         media = media.map { it.toDomainMedia() },
-        transmission = this.convertTransmission(),
+        transmission = this.transmission.convertTransmission(),
         price = price,
         location = location,
-        color = this.convertColor(),
-        bodyType = this.convertBodyType(),
-        steering = this.convertSteering(),
+        color = this.color.convertColor(),
+        bodyType = this.bodyType.convertBodyType(),
+        steering = this.steering.convertSteering(),
         rents = rents?.map { it.toDomainRent() }
     )
 
 
-private fun CarResponse.convertSteering(): Steering {
-    return when (this.steering) {
+fun String.convertSteering(): Steering {
+    return when (this) {
         Steering.LEFT.type -> Steering.LEFT
         Steering.RIGHT.type -> Steering.RIGHT
         else -> throw Exception("Invalid Car")
     }
 }
 
-private fun CarResponse.convertBodyType(): BodyType {
-    return when (this.bodyType) {
+fun String.convertBodyType(): BodyType {
+    return when (this) {
         BodyType.SEDAN.type -> BodyType.SEDAN
         BodyType.SUV.type -> BodyType.SUV
         BodyType.COUPE.type -> BodyType.COUPE
@@ -47,8 +47,8 @@ private fun CarResponse.convertBodyType(): BodyType {
     }
 }
 
-private fun CarResponse.convertColor(): Color {
-    return when (this.color) {
+fun String.convertColor(): Color {
+    return when (this) {
         Color.RED.type -> Color.RED
         Color.BLACK.type -> Color.BLACK
         Color.WHITE.type -> Color.WHITE
@@ -60,16 +60,16 @@ private fun CarResponse.convertColor(): Color {
     }
 }
 
-private fun CarResponse.convertTransmission(): Transmission {
-    return when (this.transmission) {
+fun String.convertTransmission(): Transmission {
+    return when (this) {
         Transmission.AUTOMATIC.type -> Transmission.AUTOMATIC
         Transmission.MANUAL.type -> Transmission.MANUAL
         else -> throw Exception("Invalid Car")
     }
 }
 
-private fun CarResponse.convertBrand(): Brand {
-    return when (this.brand) {
+fun String.convertBrand(): Brand {
+    return when (this) {
         Brand.HAVAL.type -> Brand.HAVAL
         Brand.HYUNDAI.type -> Brand.HYUNDAI
         Brand.VOLKSWAGEN.type -> Brand.VOLKSWAGEN
