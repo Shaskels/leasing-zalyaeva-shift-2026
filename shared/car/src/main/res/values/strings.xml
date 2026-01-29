@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="automatic">Автоматическая</string>
+    <string name="manual">Ручная</string>
+
+    <string name="left">Слева</string>
+    <string name="right">Справа</string>
+
+    <string name="sedan">Седан</string>
+    <string name="suv">Внедорожник</string>
+    <string name="coupe">Купе</string>
+    <string name="hatchback">Хэтчбэк</string>
+    <string name="cabriolet">Кабриолет</string>
+
+    <string name="black">Черный</string>
+    <string name="white">Белый</string>
+    <string name="red">Красный</string>
+    <string name="silver">Серебряный</string>
+    <string name="blue">Голубой</string>
+    <string name="grey">Серый</string>
+    <string name="orange">Оранжевый</string>
+</resources>

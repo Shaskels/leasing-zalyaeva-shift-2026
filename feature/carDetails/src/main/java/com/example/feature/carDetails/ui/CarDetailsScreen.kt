@@ -34,11 +34,8 @@ import com.example.component.uicomponent.theme.LeasingTheme
 import com.example.feature.carDetails.R
 import com.example.feature.carDetails.presentation.CarDetailsViewModel
 import com.example.feature.carDetails.presentation.ScreenState
-import com.example.shared.car.domain.entity.BodyType
 import com.example.shared.car.domain.entity.Car
-import com.example.shared.car.domain.entity.Color
-import com.example.shared.car.domain.entity.Steering
-import com.example.shared.car.domain.entity.Transmission
+import com.example.shared.car.domain.entity.getCover
 
 @Composable
 fun CarDetailsScreen(
@@ -60,7 +57,11 @@ fun CarDetailsScreen(
 }
 
 @Composable
-fun Screen(car: Car, onBackClick: () -> Unit) {
+private fun Screen(
+    car: Car,
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Scaffold(
         topBar = {
             CustomTopBar(
@@ -79,13 +80,13 @@ fun Screen(car: Car, onBackClick: () -> Unit) {
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars)
     ) { paddingValues ->
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
                 .padding(start = 16.dp, end = 16.dp, top = 24.dp)
         ) {
             CustomImage(
-                url = car.media.find { it.isCover }?.url ?: car.media.first().url,
+                url = car.getCover(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(24.dp)
@@ -115,8 +116,11 @@ fun Screen(car: Car, onBackClick: () -> Unit) {
 }
 
 @Composable
-fun CarCostCard(car: Car) {
-    Column {
+private fun CarCostCard(
+    car: Car,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
         Text(
             stringResource(R.string.cost),
             style = LeasingTheme.typography.paragraph16Medium,
@@ -141,8 +145,11 @@ fun CarCostCard(car: Car) {
 }
 
 @Composable
-fun CarInfoCard(car: Car) {
-    Column {
+private fun CarInfoCard(
+    car: Car,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
         Text(
             car.name,
             style = LeasingTheme.typography.titleH2
@@ -156,35 +163,39 @@ fun CarInfoCard(car: Car) {
 
         CarProperty(
             name = stringResource(R.string.transmission),
-            value = getTransmission(car.transmission)
+            value = stringResource(car.transmission.stringId)
         )
 
         CustomHorizontalDivider()
 
         CarProperty(
             name = stringResource(R.string.steering),
-            value = getSteering(car.steering)
+            value = stringResource(car.steering.stringId)
         )
 
         CustomHorizontalDivider()
 
         CarProperty(
             name = stringResource(R.string.body_type),
-            value = getBodyType(car.bodyType)
+            value = stringResource(car.bodyType.stringId)
         )
 
         CustomHorizontalDivider()
 
         CarProperty(
             name = stringResource(R.string.color),
-            value = getColor(car.color)
+            value = stringResource(car.color.stringId)
         )
     }
 }
 
 @Composable
-fun CarProperty(name: String, value: String) {
-    Row(modifier = Modifier.padding(vertical = 16.dp)) {
+private fun CarProperty(
+    name: String,
+    value: String,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier.padding(vertical = 16.dp)) {
         Text(
             name,
             textAlign = TextAlign.Start,
@@ -200,45 +211,5 @@ fun CarProperty(name: String, value: String) {
             color = LeasingTheme.colors.textPrimary,
             modifier = Modifier.weight(1f)
         )
-    }
-}
-
-@Composable
-fun getTransmission(transmission: Transmission): String {
-    return when (transmission) {
-        Transmission.AUTOMATIC -> stringResource(R.string.automatic)
-        Transmission.MANUAL -> stringResource(R.string.manual)
-    }
-}
-
-@Composable
-fun getSteering(steering: Steering): String {
-    return when (steering) {
-        Steering.LEFT -> stringResource(R.string.left)
-        Steering.RIGHT -> stringResource(R.string.right)
-    }
-}
-
-@Composable
-fun getBodyType(bodyType: BodyType): String {
-    return when (bodyType) {
-        BodyType.SEDAN -> stringResource(R.string.sedan)
-        BodyType.SUV -> stringResource(R.string.suv)
-        BodyType.COUPE -> stringResource(R.string.coupe)
-        BodyType.HATCHBACK -> stringResource(R.string.hatchback)
-        BodyType.CABRIOLET -> stringResource(R.string.cabriolet)
-    }
-}
-
-@Composable
-fun getColor(color: Color): String {
-    return when (color) {
-        Color.BLACK -> stringResource(R.string.black)
-        Color.WHITE -> stringResource(R.string.white)
-        Color.RED -> stringResource(R.string.red)
-        Color.SILVER -> stringResource(R.string.silver)
-        Color.BLUE -> stringResource(R.string.blue)
-        Color.GREY -> stringResource(R.string.grey)
-        Color.ORANGE -> stringResource(R.string.orange)
     }
 }

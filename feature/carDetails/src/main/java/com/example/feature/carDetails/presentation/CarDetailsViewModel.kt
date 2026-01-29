@@ -21,11 +21,12 @@ class CarDetailsViewModel @AssistedInject constructor(
     private val _screenState = MutableStateFlow<ScreenState>(ScreenState.Loading)
     val screenState = _screenState.asStateFlow()
 
-    val coroutineExceptionHandler = CoroutineExceptionHandler { context, throwable ->
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { context, throwable ->
         _screenState.value = ScreenState.Error
     }
 
     fun loadCar() {
+        _screenState.value = ScreenState.Loading
         viewModelScope.launch(coroutineExceptionHandler) {
             _screenState.value = ScreenState.Content( getCarUseCase(carId))
         }

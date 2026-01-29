@@ -1,6 +1,8 @@
 package com.example.shared.car.domain.entity
 
-enum class Steering(val type: String) {
-    LEFT("left"),
-    RIGHT("right")
+import com.example.shared.car.R
+
+enum class Steering(val type: String, val stringId: Int) {
+    LEFT("left", R.string.left),
+    RIGHT("right", R.string.right)
 }
