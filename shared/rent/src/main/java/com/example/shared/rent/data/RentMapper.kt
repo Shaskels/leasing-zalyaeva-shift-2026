@@ -11,11 +11,12 @@ import com.example.shared.rent.data.model.RentResponse
 import com.example.shared.rent.domain.CarInfo
 import com.example.shared.rent.domain.Rent
 import com.example.shared.rent.domain.RentInfo
+import com.example.shared.rent.domain.RentStatus
 
 fun RentResponse.toDomainRent(): Rent = Rent(
     id = id,
     carInfo = carInfo.toDomainCarInfo(),
-    status = status,
+    status = status.convertStatus(),
     pickupLocation = pickupLocation,
     returnLocation = returnLocation,
     startDate = startDate,
@@ -30,6 +31,13 @@ fun RentResponse.toDomainRent(): Rent = Rent(
     comment = comment
 )
 
+fun String.convertStatus(): RentStatus {
+    return when (this) {
+        RentStatus.CREATED.type -> RentStatus.CREATED
+        RentStatus.DONE.type -> RentStatus.DONE
+        else -> throw Exception("Invalid Car")
+    }
+}
 fun CarInfoResponse.toDomainCarInfo(): CarInfo = CarInfo(
     id = id,
     name = name,
