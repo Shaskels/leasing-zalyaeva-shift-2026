@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.rentCar"
+    namespace = "com.example.feature.rentSuccess"
     compileSdk {
         version = release(36)
     }
@@ -31,8 +31,6 @@ kotlin{
 
 dependencies {
     implementation(project(":shared:rent"))
-    implementation(project(":shared:car"))
-    implementation(project(":shared:network"))
     implementation(project(":component:uicomponent"))
 
     implementation(libs.hilt.android.runtime)
