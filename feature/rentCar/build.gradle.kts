@@ -31,6 +31,7 @@ kotlin{
 
 dependencies {
     implementation(project(":shared:rent"))
+    implementation(project(":shared:car"))
     implementation(project(":shared:network"))
     implementation(project(":component:uicomponent"))
 
