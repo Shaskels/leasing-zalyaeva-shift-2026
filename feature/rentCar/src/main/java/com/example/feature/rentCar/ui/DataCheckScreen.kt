@@ -28,6 +28,7 @@ import com.example.component.uicomponent.CustomButton
 import com.example.component.uicomponent.CustomProgressIndicator
 import com.example.component.uicomponent.CustomTopBar
 import com.example.component.uicomponent.Loading
+import com.example.component.uicomponent.RentData
 import com.example.component.uicomponent.theme.LeasingTheme
 import com.example.feature.rentCar.R
 import com.example.feature.rentCar.presentation.DataCheckState
@@ -97,12 +98,12 @@ private fun Screen(
                 modifier = Modifier.padding(bottom = 24.dp)
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                    Data(
+                    RentData(
                         name = stringResource(R.string.car),
                         value = car.name
                     )
 
-                    Data(
+                    RentData(
                         name = stringResource(R.string.rent_dates),
                         value = rentCarViewModel.convertMillisToDate(
                             rentInfo.startDate,
@@ -110,12 +111,12 @@ private fun Screen(
                         ),
                     )
 
-                    Data(
+                    RentData(
                         name = stringResource(R.string.pickup_location),
                         value = rentInfo.pickupLocation
                     )
 
-                    Data(
+                    RentData(
                         name = stringResource(R.string.return_location),
                         value = rentInfo.returnLocation,
                         modifier = Modifier.padding(bottom = 24.dp)
@@ -129,27 +130,27 @@ private fun Screen(
                 modifier = Modifier.padding(bottom = 24.dp)
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                    Data(
+                    RentData(
                         name = stringResource(R.string.fio),
                         value = "${rentInfo.lastName} ${rentInfo.firstName} ${rentInfo.middleName ?: ""}"
                     )
 
-                    Data(
+                    RentData(
                         name = stringResource(R.string.birth_date),
                         value = rentInfo.birthDate,
                     )
 
-                    Data(
+                    RentData(
                         name = stringResource(R.string.phone),
                         value = rentInfo.phone
                     )
 
-                    Data(
+                    RentData(
                         name = stringResource(R.string.email),
                         value = rentInfo.email
                     )
 
-                    Data(
+                    RentData(
                         name = stringResource(R.string.comment),
                         value = rentInfo.comment ?: "",
                         modifier = Modifier.padding(bottom = 24.dp)
@@ -191,30 +192,6 @@ private fun CostBox(
             "$dates (${pluralStringResource(R.plurals.numberOfDays, days, days)} )",
             style = LeasingTheme.typography.paragraph16Regular,
             color = LeasingTheme.colors.textSecondary
-        )
-    }
-}
-
-
-@Composable
-private fun Data(
-    name: String,
-    value: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(2.dp),
-        modifier = modifier.padding(horizontal = 16.dp)
-    ) {
-        Text(
-            name,
-            style = LeasingTheme.typography.paragraph12Regular,
-            color = LeasingTheme.colors.textTertiary
-        )
-
-        Text(
-            value,
-            style = LeasingTheme.typography.paragraph16Regular,
         )
     }
 }

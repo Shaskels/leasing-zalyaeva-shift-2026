@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="car_rent">Автомобиль забронирован</string>
+    <string name="pickup_location">Место получения</string>
+    <string name="return_location">Место возврата</string>
+    <string name="car">Автомобиль</string>
+    <string name="rent_dates">Даты аренды</string>
+    <string name="all_info_in_sms">Вся информация была продублирована в SMS</string>
+    <string name="check_status">Посмотреть статус</string>
+    <string name="on_main">На главную</string>
+</resources>

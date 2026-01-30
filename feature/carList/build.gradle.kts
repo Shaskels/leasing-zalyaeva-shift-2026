@@ -34,10 +34,6 @@ dependencies {
     implementation(project(":shared:network"))
     implementation(project(":component:uicomponent"))
 
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.http)
-    implementation(libs.okhttp)
-
     implementation(libs.androidx.paging.compose)
     implementation(libs.androidx.paging.runtime)
 

@@ -3,7 +3,7 @@ package com.example.shared.rent.domain
 data class Rent(
     val id: String,
     val carInfo: CarInfo,
-    val status: String,
+    val status: RentStatus,
     val pickupLocation: String,
     val returnLocation: String,
     val startDate: Long,

@@ -33,10 +33,6 @@ dependencies {
     implementation(project(":shared:car"))
     implementation(project(":component:uicomponent"))
 
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.http)
-    implementation(libs.okhttp)
-
     implementation(libs.hilt.android.runtime)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.compose)

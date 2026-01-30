@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil3.annotation.ExperimentalCoilApi
 import com.example.component.uicomponent.CustomDarkButton
 import com.example.component.uicomponent.CustomImage
 import com.example.component.uicomponent.CustomTextField
@@ -157,7 +156,6 @@ fun FiltersCard(query: String, onQueryChange: (String) -> Unit) {
     )
 }
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun CarListItem(
     car: Car,
