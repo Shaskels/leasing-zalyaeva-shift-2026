@@ -17,6 +17,8 @@ import com.example.feature.carDetails.ui.CarDetailsScreen
 import com.example.feature.carList.ui.CarListScreen
 import com.example.feature.rentCar.presentation.RentCarViewModel
 import com.example.feature.rentCar.ui.RentCarScreen
+import com.example.feature.rentSuccess.presentation.RentSuccessViewModel
+import com.example.feature.rentSuccess.ui.RentSuccessScreen
 
 @Composable
 fun MainScreen() {
@@ -87,10 +89,25 @@ fun MainScreen() {
                     RentCarScreen(
                         rentCarViewModel = viewModel,
                         onSuccess = {
-                            backStack.clearAndAdd(Route.Orders)
+                            backStack.clearAndAdd(Route.RentSuccess(it))
                         },
                         onBackClick = {
                             backStack.removeAt(backStack.lastIndex)
+                        }
+                    )
+                }
+
+                entry<Route.RentSuccess> { route ->
+                    val viewModel = hiltViewModel(
+                        key = route.rentId,
+                        creationCallback = { factory: RentSuccessViewModel.RentSuccessViewModelFactory ->
+                            factory.create(route.rentId)
+                        }
+                    )
+                    RentSuccessScreen(
+                        rentSuccessViewModel = viewModel,
+                        onBackClick = {
+                            backStack.clearAndAdd(Route.CarList)
                         }
                     )
                 }

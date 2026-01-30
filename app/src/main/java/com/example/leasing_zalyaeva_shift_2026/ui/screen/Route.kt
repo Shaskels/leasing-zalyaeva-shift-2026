@@ -20,4 +20,7 @@ sealed interface Route : NavKey {
 
     @Serializable
     data class RentCar(val carId: String): Route
+
+    @Serializable
+    data class RentSuccess(val rentId: String): Route
 }

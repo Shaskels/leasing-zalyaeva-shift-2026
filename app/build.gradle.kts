@@ -44,11 +44,10 @@ kotlin{
 }
 
 dependencies {
-
-
     implementation(project(":component:uicomponent"))
     implementation(project(":feature:carList"))
     implementation(project(":feature:carDetails"))
+    implementation(project(":feature:rentSuccess"))
     implementation(project(":feature:rentCar"))
 
     implementation(libs.androidx.navigation3.runtime)
