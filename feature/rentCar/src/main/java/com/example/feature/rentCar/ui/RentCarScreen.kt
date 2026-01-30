@@ -9,11 +9,16 @@ import com.example.component.uicomponent.Loading
 import com.example.feature.rentCar.presentation.RentCarViewModel
 import com.example.feature.rentCar.presentation.RentStage
 import com.example.feature.rentCar.presentation.ScreenState
+import com.example.shared.rent.domain.Rent
 
 const val stepsCount = 3
 
 @Composable
-fun RentCarScreen(rentCarViewModel: RentCarViewModel, onSuccess: (String) -> Unit, onBackClick: () -> Unit) {
+fun RentCarScreen(
+    rentCarViewModel: RentCarViewModel,
+    onSuccess: (Rent) -> Unit,
+    onBackClick: () -> Unit
+) {
     val screenState by rentCarViewModel.screenState.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -27,7 +32,7 @@ fun RentCarScreen(rentCarViewModel: RentCarViewModel, onSuccess: (String) -> Uni
 
         ScreenState.Initial -> {}
         is ScreenState.Success -> {
-            onSuccess(state.rentId)
+            onSuccess(state.rent)
         }
 
         ScreenState.Error -> Error(onRetryClick = { rentCarViewModel.rentCar() })
@@ -41,8 +46,19 @@ private fun ContentScreen(
     onBackClick: () -> Unit,
 ) {
     when (val state = screenState.stage) {
-        RentStage.CarRent -> CarRentScreen(rentCarViewModel, screenState.rentInfo, onBackClick)
-        RentStage.ClientData -> ClientDataScreen(rentCarViewModel, screenState.rentInfo)
+        is RentStage.CarRent -> CarRentScreen(
+            rentCarViewModel,
+            screenState.rentInfo,
+            state.validationState,
+            onBackClick
+        )
+
+        is RentStage.ClientData -> ClientDataScreen(
+            rentCarViewModel,
+            screenState.rentInfo,
+            state.validationState
+        )
+
         is RentStage.DataCheck -> DataCheckScreen(
             rentCarViewModel,
             screenState.rentInfo,

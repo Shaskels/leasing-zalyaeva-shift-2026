@@ -34,6 +34,7 @@ import com.example.feature.rentCar.R
 import com.example.feature.rentCar.presentation.DataCheckState
 import com.example.feature.rentCar.presentation.RentCarViewModel
 import com.example.feature.rentCar.presentation.RentStage
+import com.example.feature.rentCar.presentation.ValidationState
 import com.example.shared.car.domain.entity.Car
 import com.example.shared.rent.domain.RentInfo
 
@@ -94,7 +95,7 @@ private fun Screen(
 
             DataCard(
                 headline = stringResource(R.string.rent_data),
-                onEditClick = { rentCarViewModel.goToStage(RentStage.CarRent) },
+                onEditClick = { rentCarViewModel.goToStage(RentStage.CarRent(ValidationState.VALID)) },
                 modifier = Modifier.padding(bottom = 24.dp)
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -126,7 +127,7 @@ private fun Screen(
 
             DataCard(
                 headline = stringResource(R.string.user_data),
-                onEditClick = { rentCarViewModel.goToStage(RentStage.ClientData) },
+                onEditClick = { rentCarViewModel.goToStage(RentStage.ClientData(ValidationState.VALID)) },
                 modifier = Modifier.padding(bottom = 24.dp)
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -137,12 +138,12 @@ private fun Screen(
 
                     RentData(
                         name = stringResource(R.string.birth_date),
-                        value = rentInfo.birthDate,
+                        value = rentCarViewModel.birthDateToISODate( rentInfo.birthDate) ?: "",
                     )
 
                     RentData(
                         name = stringResource(R.string.phone),
-                        value = rentInfo.phone
+                        value = "+7" + rentInfo.phone
                     )
 
                     RentData(
@@ -189,7 +190,7 @@ private fun CostBox(
         )
 
         Text(
-            "$dates (${pluralStringResource(R.plurals.numberOfDays, days, days)} )",
+            "$dates (${pluralStringResource(R.plurals.numberOfDays, days, days)})",
             style = LeasingTheme.typography.paragraph16Regular,
             color = LeasingTheme.colors.textSecondary
         )

@@ -29,6 +29,7 @@ import com.example.component.uicomponent.CustomTopBar
 import com.example.component.uicomponent.theme.LeasingTheme
 import com.example.feature.rentCar.R
 import com.example.feature.rentCar.presentation.RentCarViewModel
+import com.example.feature.rentCar.presentation.ValidationState
 import com.example.shared.rent.domain.RentInfo
 
 private const val step = 1
@@ -37,6 +38,7 @@ private const val step = 1
 fun CarRentScreen(
     rentCarViewModel: RentCarViewModel,
     rentInfo: RentInfo,
+    validationState: ValidationState,
     onBackClick: () -> Unit,
 ) {
     Scaffold(
@@ -67,25 +69,28 @@ fun CarRentScreen(
             )
 
             val days = rentCarViewModel.getRentDays(rentInfo.startDate, rentInfo.endDate)
+            val date = rentCarViewModel.convertMillisToDate(rentInfo.startDate, rentInfo.endDate)
             DateInput(
-                date = "${
-                    rentCarViewModel.convertMillisToDate(
-                        rentInfo.startDate,
-                        rentInfo.endDate
-                    )
-                } (${pluralStringResource(R.plurals.numberOfDays, days, days)})",
+                date = "$date (${pluralStringResource(R.plurals.numberOfDays, days, days)})",
+                validationState = validationState,
                 onDateChange = rentCarViewModel::setDates
             )
 
             UserInput(
                 value = rentInfo.pickupLocation,
                 onValueChange = rentCarViewModel::setPickupLocation,
+                errorText = if (validationState == ValidationState.PICKUP_LOCATION_INVALID) stringResource(
+                    R.string.pickup_location_validation
+                ) else null,
                 placeholder = stringResource(R.string.pickup_location)
             )
 
             UserInput(
                 value = rentInfo.returnLocation,
                 onValueChange = rentCarViewModel::setReturnLocation,
+                errorText = if (validationState == ValidationState.RETURN_LOCATION_INVALID) stringResource(
+                    R.string.return_location_validation
+                ) else null,
                 placeholder = stringResource(R.string.return_location)
             )
 
@@ -101,7 +106,11 @@ fun CarRentScreen(
 }
 
 @Composable
-private fun DateInput(date: String, onDateChange: (Long?, Long?) -> Unit) {
+private fun DateInput(
+    date: String,
+    validationState: ValidationState,
+    onDateChange: (Long?, Long?) -> Unit
+) {
     var showDatePicker by remember { mutableStateOf(false) }
 
     Box(
@@ -112,6 +121,9 @@ private fun DateInput(date: String, onDateChange: (Long?, Long?) -> Unit) {
             onValueChange = {},
             readOnly = true,
             placeholder = stringResource(R.string.rent_dates),
+            errorText = if (validationState == ValidationState.DATES_INVALID) stringResource(
+                R.string.dates_validation
+            ) else null,
             trailingIcon = {
                 IconButton(onClick = { showDatePicker = !showDatePicker }) {
                     Icon(
@@ -141,6 +153,7 @@ fun UserInput(
     onValueChange: (String) -> Unit,
     placeholder: String,
     modifier: Modifier = Modifier,
+    errorText: String? = null,
     readOnly: Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     trailingIcon: @Composable (() -> Unit)? = null,
@@ -157,6 +170,7 @@ fun UserInput(
             onValueChange = onValueChange,
             placeholder = placeholder,
             readOnly = readOnly,
+            errorText = errorText,
             trailingIcon = trailingIcon,
             visualTransformation = visualTransformation,
             modifier = Modifier.fillMaxWidth()
