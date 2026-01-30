@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="car_rent">Бронирование авто</string>
+    <string name="client_data">Ваши данные</string>
+    <string name="data_check">Проверка данных</string>
+    <string name="rent_dates">Даты аренды</string>
+    <string name="pickup_location">Место получения</string>
+    <string name="return_location">Место возврата</string>
+    <string name="next">Продолжить</string>
+
+    <string name="last_name">Фамилия</string>
+    <string name="first_name">Имя</string>
+    <string name="middle_name">Отчество</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="phone">Номер телефона</string>
+    <string name="email">Электронная почта</string>
+    <string name="comment">Комментарий</string>
+    <string name="enter_extra_info">Введите дополнительную информацию</string>
+    <string name="accept_agreement">Принимаю условия соглашения</string>
+
+    <string name="rent_data">Данные брони</string>
+    <string name="car">Автомобиль</string>
+    <string name="user_data">Данные заказчика</string>
+    <string name="fio">ФИО</string>
+    <string name="total">Итого</string>
+    <string name="form">Оформить</string>
+
+    <plurals name="numberOfDays">
+        <item quantity="zero">%d дней</item>
+        <item quantity="one">%d день</item>
+        <item quantity="few">%d дня</item>
+        <item quantity="many">%d дней</item>
+    </plurals>
+</resources>

@@ -47,13 +47,13 @@ fun RentInfo.toModel(): RentInfoRequest = RentInfoRequest(
     birthDate = birthDate,
     carId = carId,
     email = email,
-    endDate = endDate,
+    endDate = endDate ?: 0,
     firstName = firstName,
     lastName = lastName,
     phone = phone,
     pickupLocation = pickupLocation,
     returnLocation = returnLocation,
-    startDate = startDate,
+    startDate = startDate ?: 0,
     comment = comment,
     middleName = middleName
 )

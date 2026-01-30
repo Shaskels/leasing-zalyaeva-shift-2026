@@ -79,7 +79,6 @@ fun CarListScreen(
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(24.dp),
                     modifier = Modifier
-                        .padding(horizontal = 16.dp)
                         .fillMaxSize()
                 ) {
                     item {

@@ -34,6 +34,6 @@ class CarDetailsViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface CarDetailsViewModelFactory {
-        fun create(postId: String): CarDetailsViewModel
+        fun create(carId: String): CarDetailsViewModel
     }
 }

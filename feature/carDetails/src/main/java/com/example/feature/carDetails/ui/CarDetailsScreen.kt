@@ -40,7 +40,8 @@ import com.example.shared.car.domain.entity.getCover
 @Composable
 fun CarDetailsScreen(
     carDetailsViewModel: CarDetailsViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onBookClick: (String) -> Unit,
 ) {
 
     val screenState by carDetailsViewModel.screenState.collectAsState()
@@ -50,7 +51,7 @@ fun CarDetailsScreen(
     }
 
     when (val state = screenState) {
-        is ScreenState.Content -> Screen(state.car, onBackClick)
+        is ScreenState.Content -> Screen(state.car, onBackClick, onBookClick)
         ScreenState.Error -> Error(carDetailsViewModel::loadCar)
         ScreenState.Loading -> Loading()
     }
@@ -60,6 +61,7 @@ fun CarDetailsScreen(
 private fun Screen(
     car: Car,
     onBackClick: () -> Unit,
+    onBookClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -106,7 +108,7 @@ private fun Screen(
 
             CustomButton(
                 text = stringResource(R.string.book),
-                onClick = {},
+                onClick = { onBookClick(car.id) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp)
