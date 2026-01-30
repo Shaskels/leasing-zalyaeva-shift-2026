@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":component:uicomponent"))
     implementation(project(":feature:carList"))
     implementation(project(":feature:carDetails"))
+    implementation(project(":feature:rentCar"))
 
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)

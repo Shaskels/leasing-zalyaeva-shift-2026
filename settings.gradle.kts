@@ -24,6 +24,8 @@ include(":app")
 include(":component:uicomponent")
 include(":feature:carList")
 include(":feature:carDetails")
+include(":feature:rentCar")
 include(":shared:car")
+include(":shared:rent")
 include(":shared:network")
  

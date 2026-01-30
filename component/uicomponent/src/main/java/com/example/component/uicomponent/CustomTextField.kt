@@ -17,6 +17,7 @@ fun CustomTextField(
     modifier: Modifier = Modifier,
     singleLine: Boolean = true,
     readOnly: Boolean = false,
+    minLines: Int = 1,
     enabled: Boolean = true,
     errorText: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -38,6 +39,7 @@ fun CustomTextField(
             errorText?.let { Text(errorText) }
         },
         singleLine = singleLine,
+        minLines = minLines,
         trailingIcon = if (errorText == null) trailingIcon else errorTrailingIcon,
         visualTransformation = visualTransformation,
         textStyle = LeasingTheme.typography.paragraph16Regular,
