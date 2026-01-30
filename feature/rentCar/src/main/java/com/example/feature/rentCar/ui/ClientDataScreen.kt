@@ -31,6 +31,7 @@ import com.example.component.uicomponent.theme.LeasingTheme
 import com.example.feature.rentCar.R
 import com.example.feature.rentCar.presentation.RentCarViewModel
 import com.example.feature.rentCar.presentation.RentStage
+import com.example.feature.rentCar.presentation.ValidationState
 import com.example.shared.rent.domain.RentInfo
 
 private const val step = 2
@@ -38,7 +39,8 @@ private const val step = 2
 @Composable
 fun ClientDataScreen(
     rentCarViewModel: RentCarViewModel,
-    rentInfo: RentInfo
+    rentInfo: RentInfo,
+    validationState: ValidationState
 ) {
     var acceptAgreement by remember { mutableStateOf(false) }
 
@@ -47,7 +49,13 @@ fun ClientDataScreen(
             CustomTopBar(
                 title = stringResource(R.string.client_data),
                 navigationIcon = {
-                    IconButton(onClick = { rentCarViewModel.goToStage(RentStage.CarRent) }) {
+                    IconButton(onClick = {
+                        rentCarViewModel.goToStage(
+                            RentStage.CarRent(
+                                ValidationState.VALID
+                            )
+                        )
+                    }) {
                         Icon(
                             painter = painterResource(R.drawable.ic_left),
                             contentDescription = null
@@ -73,12 +81,18 @@ fun ClientDataScreen(
             UserInput(
                 value = rentInfo.lastName,
                 onValueChange = rentCarViewModel::setLastName,
+                errorText = if (validationState == ValidationState.LAST_NAME_INVALID) stringResource(
+                    R.string.last_name_validation
+                ) else null,
                 placeholder = stringResource(R.string.last_name)
             )
 
             UserInput(
                 value = rentInfo.firstName,
                 onValueChange = rentCarViewModel::setFirstName,
+                errorText = if (validationState == ValidationState.FIRST_NAME_INVALID) stringResource(
+                    R.string.first_name_validation
+                ) else null,
                 placeholder = stringResource(R.string.first_name)
             )
 
@@ -92,6 +106,9 @@ fun ClientDataScreen(
                 value = rentInfo.birthDate,
                 onValueChange = rentCarViewModel::setBirthDate,
                 visualTransformation = MaskVisualTransformation("##.##.####"),
+                errorText = if (validationState == ValidationState.BIRTH_DATE_INVALID) stringResource(
+                    R.string.birth_date_validation
+                ) else null,
                 placeholder = stringResource(R.string.birth_date)
             )
 
@@ -99,12 +116,18 @@ fun ClientDataScreen(
                 value = rentInfo.phone,
                 onValueChange = rentCarViewModel::setPhone,
                 visualTransformation = MaskVisualTransformation("+7 ### ### ## ##"),
+                errorText = if (validationState == ValidationState.PHONE_INVALID) stringResource(
+                    R.string.phone_validation
+                ) else null,
                 placeholder = stringResource(R.string.phone)
             )
 
             UserInput(
                 value = rentInfo.email,
                 onValueChange = rentCarViewModel::setEmail,
+                errorText = if (validationState == ValidationState.EMAIL_INVALID) stringResource(
+                    R.string.email_validation
+                ) else null,
                 placeholder = stringResource(R.string.email)
             )
 

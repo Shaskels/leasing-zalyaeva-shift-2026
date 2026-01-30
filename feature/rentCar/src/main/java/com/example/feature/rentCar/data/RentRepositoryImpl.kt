@@ -15,7 +15,7 @@ class RentRepositoryImpl @Inject constructor(private val rentService: RentServic
     RentRepository {
 
     override suspend fun rentCar(rentInfo: RentInfo): Rent {
-        return rentService.postRent(rentInfo.toModel()).rentResponse.toDomainRent()
+        return rentService.postRent(rentInfo.toModel()).rent.toDomainRent()
     }
 
     override suspend fun getCar(carId: String): Car {

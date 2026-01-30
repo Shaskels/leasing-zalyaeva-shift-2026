@@ -8,4 +8,5 @@
     <string name="all_info_in_sms">Вся информация была продублирована в SMS</string>
     <string name="check_status">Посмотреть статус</string>
     <string name="on_main">На главную</string>
+    <string name="status">Статус</string>
 </resources>
