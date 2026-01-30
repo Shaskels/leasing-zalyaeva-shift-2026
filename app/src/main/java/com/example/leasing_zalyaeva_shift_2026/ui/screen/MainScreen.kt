@@ -15,6 +15,8 @@ import com.example.component.uicomponent.theme.LeasingTheme
 import com.example.feature.carDetails.presentation.CarDetailsViewModel
 import com.example.feature.carDetails.ui.CarDetailsScreen
 import com.example.feature.carList.ui.CarListScreen
+import com.example.feature.rentCar.presentation.RentCarViewModel
+import com.example.feature.rentCar.ui.RentCarScreen
 
 @Composable
 fun MainScreen() {
@@ -68,6 +70,27 @@ fun MainScreen() {
                         carDetailsViewModel = viewModel,
                         onBackClick = {
                             backStack.removeAt(backStack.lastIndex)
+                        },
+                        onBookClick = { carId ->
+                            backStack.add(Route.RentCar(carId))
+                        }
+                    )
+                }
+
+                entry<Route.RentCar> { route ->
+                    val viewModel = hiltViewModel(
+                        key = route.carId,
+                        creationCallback = { factory: RentCarViewModel.RentCarViewModelFactory ->
+                            factory.create(route.carId)
+                        }
+                    )
+                    RentCarScreen(
+                        rentCarViewModel = viewModel,
+                        onSuccess = {
+                            backStack.clearAndAdd(Route.Orders)
+                        },
+                        onBackClick = {
+                            backStack.removeAt(backStack.lastIndex)
                         }
                     )
                 }
@@ -76,7 +99,9 @@ fun MainScreen() {
 
                 }
 
-                entry<Route.Profile> { }
+                entry<Route.Profile> {
+
+                }
             },
             modifier = Modifier.padding(paddingValues)
         )
