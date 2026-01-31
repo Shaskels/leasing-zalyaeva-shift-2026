@@ -1,7 +1,6 @@
 package com.example.shared.car.domain.entity
 
 import com.example.shared.car.R
-
 enum class Color(val type: String, val stringId: Int) {
     BLACK("black", R.string.black),
     WHITE("white", R.string.white),
