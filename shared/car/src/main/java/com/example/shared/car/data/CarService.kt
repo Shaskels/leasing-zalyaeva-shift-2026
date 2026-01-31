@@ -11,6 +11,18 @@ interface CarService {
     suspend fun getCars(
         @Query("search")
         query: String,
+        @Query("maxPrice")
+        maxPrice: Int,
+        @Query("minPrice")
+        minPrice: Int,
+        @Query("transmission")
+        transmission: String? = null,
+        @Query("bodyType")
+        bodyType: String? = null,
+        @Query("brand")
+        brand: String? = null,
+        @Query("steering")
+        steering: String? = null,
         @Query("page")
         page: Int
     ): PagedResponse
