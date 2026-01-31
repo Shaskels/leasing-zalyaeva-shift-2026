@@ -8,7 +8,7 @@ data class RentResponse(
     @SerialName("_id")
     val id: String,
     val carInfo: CarInfoResponse,
-    val status: String,
+    val status: Int,
     val pickupLocation: String,
     val returnLocation: String,
     val startDate: Long,
@@ -20,5 +20,4 @@ data class RentResponse(
     val birthDate: String,
     val email: String,
     val phone: String,
-    val comment: String,
 )

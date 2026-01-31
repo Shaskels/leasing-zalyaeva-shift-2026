@@ -99,13 +99,14 @@ fun MainScreen() {
 
                 entry<Route.RentSuccess> { route ->
                     val viewModel = hiltViewModel(
-                        key = route.rentId,
+                        key = route.rent.id,
                         creationCallback = { factory: RentSuccessViewModel.RentSuccessViewModelFactory ->
-                            factory.create(route.rentId)
+                            factory.create(route.rent.id)
                         }
                     )
                     RentSuccessScreen(
                         rentSuccessViewModel = viewModel,
+                        rent = route.rent,
                         onBackClick = {
                             backStack.clearAndAdd(Route.CarList)
                         }

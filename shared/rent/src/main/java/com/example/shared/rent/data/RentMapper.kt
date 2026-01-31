@@ -5,6 +5,7 @@ import com.example.shared.car.data.convertBrand
 import com.example.shared.car.data.convertColor
 import com.example.shared.car.data.convertSteering
 import com.example.shared.car.data.convertTransmission
+import com.example.shared.car.data.toDomainMedia
 import com.example.shared.rent.data.model.CarInfoResponse
 import com.example.shared.rent.data.model.RentInfoRequest
 import com.example.shared.rent.data.model.RentResponse
@@ -28,10 +29,9 @@ fun RentResponse.toDomainRent(): Rent = Rent(
     birthDate = birthDate,
     email = email,
     phone = phone,
-    comment = comment
 )
 
-fun String.convertStatus(): RentStatus {
+fun Int.convertStatus(): RentStatus {
     return when (this) {
         RentStatus.CREATED.type -> RentStatus.CREATED
         RentStatus.DONE.type -> RentStatus.DONE
@@ -42,8 +42,8 @@ fun CarInfoResponse.toDomainCarInfo(): CarInfo = CarInfo(
     id = id,
     name = name,
     brand = this.brand.convertBrand(),
-    img = img,
-    transmission = this.brand.convertTransmission(),
+    img = media.map { it.toDomainMedia() },
+    transmission = this.transmission.convertTransmission(),
     price = price,
     location = location,
     color = this.color.convertColor(),

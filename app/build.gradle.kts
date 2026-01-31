@@ -45,6 +45,7 @@ kotlin{
 
 dependencies {
     implementation(project(":component:uicomponent"))
+    implementation(project(":shared:rent"))
     implementation(project(":feature:carList"))
     implementation(project(":feature:carDetails"))
     implementation(project(":feature:rentSuccess"))

@@ -1,5 +1,7 @@
 package com.example.feature.rentCar.presentation
 
+import android.util.Log
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature.rentCar.domain.GetCarUseCase
@@ -17,6 +19,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.time.DateTimeException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -33,11 +38,12 @@ class RentCarViewModel @AssistedInject constructor(
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { context, throwable ->
         _screenState.value = ScreenState.Error
+        Log.d("Error", throwable.message.toString() + throwable.stackTraceToString())
     }
 
     fun firstStage() {
         _screenState.value = Content(
-            RentStage.CarRent,
+            RentStage.CarRent(ValidationState.VALID),
             RentInfo(
                 birthDate = "",
                 carId = carId,
@@ -58,15 +64,30 @@ class RentCarViewModel @AssistedInject constructor(
     fun nextStage() {
         _screenState.updateState<Content> { currentState ->
             when (currentState.stage) {
-                is RentStage.CarRent ->
-                    currentState.copy(
-                        stage = ClientData,
-                    )
+                is RentStage.CarRent -> {
+                    val valid = validateFirstStage()
+                    if (valid == ValidationState.VALID) {
+                        currentState.copy(
+                            stage = ClientData(valid),
+                        )
+                    } else {
+                        currentState.copy(
+                            stage = RentStage.CarRent(valid),
+                        )
+                    }
+                }
 
                 is ClientData -> {
-                    currentState.copy(
-                        stage = RentStage.DataCheck(DataCheckState.Loading),
-                    )
+                    val valid = validateAllFields()
+                    if (valid == ValidationState.VALID) {
+                        currentState.copy(
+                            stage = RentStage.DataCheck(DataCheckState.Loading),
+                        )
+                    } else {
+                        currentState.copy(
+                            stage = ClientData(valid),
+                        )
+                    }
                 }
 
                 is RentStage.DataCheck -> {
@@ -83,12 +104,12 @@ class RentCarViewModel @AssistedInject constructor(
             when (stage) {
                 is RentStage.CarRent ->
                     currentState.copy(
-                        stage = RentStage.CarRent,
+                        stage = RentStage.CarRent(validateFirstStage()),
                     )
 
                 is ClientData -> {
                     currentState.copy(
-                        stage = ClientData,
+                        stage = ClientData(validateAllFields()),
                     )
                 }
 
@@ -111,10 +132,15 @@ class RentCarViewModel @AssistedInject constructor(
                         stage = RentStage.Loading
                     )
                 }
+
+                val rent = (_screenState.value as Content).rentInfo
                 val res = rentCarUseCase(
-                    (_screenState.value as Content).rentInfo
+                    rent.copy(
+                        birthDate = birthDateToISODate(rent.birthDate) ?: "",
+                        phone = "+7" + rent.phone
+                    )
                 )
-                _screenState.value = ScreenState.Success(res.id)
+                _screenState.value = ScreenState.Success(res)
             }
         }
     }
@@ -133,6 +159,55 @@ class RentCarViewModel @AssistedInject constructor(
                 )
             }
         }
+    }
+
+    private fun validateFirstStage(): ValidationState {
+        return if (_screenState.value is Content) {
+            val rent = (_screenState.value as Content).rentInfo
+
+            when {
+                rent.startDate == null || rent.endDate == null -> ValidationState.DATES_INVALID
+                rent.pickupLocation == "" -> ValidationState.PICKUP_LOCATION_INVALID
+                rent.returnLocation == "" -> ValidationState.RETURN_LOCATION_INVALID
+                else -> ValidationState.VALID
+            }
+        } else ValidationState.DATES_INVALID
+    }
+
+    private fun validateAllFields(): ValidationState {
+        return if (_screenState.value is Content) {
+            val rent = (_screenState.value as Content).rentInfo
+
+            when {
+                rent.startDate == null || rent.endDate == null -> ValidationState.DATES_INVALID
+                rent.pickupLocation == "" -> ValidationState.PICKUP_LOCATION_INVALID
+                rent.returnLocation == "" -> ValidationState.RETURN_LOCATION_INVALID
+                rent.lastName == "" -> ValidationState.LAST_NAME_INVALID
+                rent.firstName == "" -> ValidationState.FIRST_NAME_INVALID
+                birthDateToISODate(rent.birthDate) == null -> ValidationState.BIRTH_DATE_INVALID
+                rent.phone.length < 10 -> ValidationState.PHONE_INVALID
+                !android.util.Patterns.EMAIL_ADDRESS.matcher(rent.email)
+                    .matches() -> ValidationState.EMAIL_INVALID
+
+                else -> ValidationState.VALID
+            }
+        } else ValidationState.DATES_INVALID
+    }
+
+    fun birthDateToISODate(birthDate: String): String? {
+        if (birthDate.length < 8 || !birthDate.isDigitsOnly()) return null
+
+        val day = birthDate.substring(0, 2).toInt()
+        val month = birthDate.substring(2, 4).toInt()
+        val year = birthDate.substring(4, 8).toInt()
+        var date: LocalDate? = null
+        try {
+            date = LocalDate.of(year, month, day)
+        } catch (e: DateTimeException) {
+            Log.d("DateTimeError", e.message.toString())
+        }
+
+        return date?.format(DateTimeFormatter.ISO_DATE)
     }
 
 

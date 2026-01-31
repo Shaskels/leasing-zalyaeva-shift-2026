@@ -1,6 +1,7 @@
 package com.example.leasing_zalyaeva_shift_2026.ui.screen
 
 import androidx.navigation3.runtime.NavKey
+import com.example.shared.rent.domain.Rent
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,5 +23,5 @@ sealed interface Route : NavKey {
     data class RentCar(val carId: String): Route
 
     @Serializable
-    data class RentSuccess(val rentId: String): Route
+    data class RentSuccess(val rent: Rent): Route
 }
