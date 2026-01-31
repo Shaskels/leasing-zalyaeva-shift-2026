@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -42,16 +43,23 @@ import com.example.feature.carList.R
 import com.example.feature.carList.presentation.CarListViewModel
 import com.example.shared.car.domain.entity.Car
 import com.example.shared.car.domain.entity.getCover
+import com.example.shared.filter.Filter
 
 @Composable
 fun CarListScreen(
     onItemClick: (String) -> Unit,
+    onFiltersClick: (Filter) -> Unit,
+    filter: Filter?,
     carListViewModel: CarListViewModel = hiltViewModel()
 ) {
 
     val query by carListViewModel.query.collectAsState()
     val carList = carListViewModel.cars.collectAsLazyPagingItems()
     val pullToRefreshState = rememberPullToRefreshState()
+
+    LaunchedEffect(Unit) {
+        filter?.let { carListViewModel.setFilters(filter) }
+    }
 
     Scaffold(
         topBar = {
@@ -83,7 +91,8 @@ fun CarListScreen(
                     item {
                         FiltersCard(
                             query = query,
-                            onQueryChange = carListViewModel::search
+                            onQueryChange = carListViewModel::search,
+                            onFiltersClick = { onFiltersClick(carListViewModel.filter.value) }
                         )
                     }
 
@@ -111,7 +120,11 @@ fun CarListScreen(
 }
 
 @Composable
-fun FiltersCard(query: String, onQueryChange: (String) -> Unit) {
+fun FiltersCard(
+    query: String,
+    onQueryChange: (String) -> Unit,
+    onFiltersClick: () -> Unit,
+) {
     Text(text = stringResource(R.string.search), style = LeasingTheme.typography.paragraph14Regular)
 
     CustomTextField(
@@ -147,7 +160,7 @@ fun FiltersCard(query: String, onQueryChange: (String) -> Unit) {
     )
 
     CustomDarkButton(
-        onClick = {},
+        onClick = onFiltersClick,
         text = stringResource(R.string.filters),
         modifier = Modifier
             .padding(bottom = 16.dp)
