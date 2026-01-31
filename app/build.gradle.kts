@@ -46,10 +46,12 @@ kotlin{
 dependencies {
     implementation(project(":component:uicomponent"))
     implementation(project(":shared:rent"))
+    implementation(project(":shared:filter"))
     implementation(project(":feature:carList"))
     implementation(project(":feature:carDetails"))
     implementation(project(":feature:rentSuccess"))
     implementation(project(":feature:rentCar"))
+    implementation(project(":feature:filter"))
 
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.carList"
+    namespace = "com.example.feature.filter"
     compileSdk {
         version = release(36)
     }
@@ -31,12 +31,8 @@ kotlin{
 
 dependencies {
     implementation(project(":shared:car"))
-    implementation(project(":shared:network"))
     implementation(project(":shared:filter"))
     implementation(project(":component:uicomponent"))
-
-    implementation(libs.androidx.paging.compose)
-    implementation(libs.androidx.paging.runtime)
 
     implementation(libs.hilt.android.runtime)
     ksp(libs.hilt.android.compiler)

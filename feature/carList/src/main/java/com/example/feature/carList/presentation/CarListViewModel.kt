@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.feature.carList.domain.GetCarsUseCase
+import com.example.shared.filter.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -18,6 +19,8 @@ class CarListViewModel @Inject constructor(
     private val getCarsUseCase: GetCarsUseCase
 ) : ViewModel() {
 
+    private val _filter = MutableStateFlow(Filter())
+    val filter = _filter.asStateFlow()
     private val _query = MutableStateFlow("")
     val query = _query.asStateFlow()
 
@@ -26,5 +29,9 @@ class CarListViewModel @Inject constructor(
 
     fun search(query: String) {
         _query.value = query
+    }
+
+    fun setFilters(filter: Filter) {
+        _filter.value = filter
     }
 }

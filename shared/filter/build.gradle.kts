@@ -2,12 +2,11 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 android {
-    namespace = "com.example.feature.carList"
+    namespace = "com.example.shared.filter"
     compileSdk {
         version = release(36)
     }
@@ -31,16 +30,8 @@ kotlin{
 
 dependencies {
     implementation(project(":shared:car"))
-    implementation(project(":shared:network"))
-    implementation(project(":shared:filter"))
-    implementation(project(":component:uicomponent"))
 
-    implementation(libs.androidx.paging.compose)
-    implementation(libs.androidx.paging.runtime)
-
-    implementation(libs.hilt.android.runtime)
-    ksp(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

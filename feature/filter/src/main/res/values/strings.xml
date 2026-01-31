@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cars">Автомобили</string>
+    <string name="brand">Марка</string>
+    <string name="body_type">Тип кузова</string>
+    <string name="steering">Руль</string>
+    <string name="any">Любой</string>
+    <string name="transmission">Коробка передач</string>
+    <string name="reset_filters">Сбросить все фильтры</string>
+    <string name="find">Найти</string>
+    <string name="cost">Стоимость</string>
+    <string name="color">Цвет</string>
+</resources>

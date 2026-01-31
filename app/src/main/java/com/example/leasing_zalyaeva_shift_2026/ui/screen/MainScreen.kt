@@ -15,14 +15,16 @@ import com.example.component.uicomponent.theme.LeasingTheme
 import com.example.feature.carDetails.presentation.CarDetailsViewModel
 import com.example.feature.carDetails.ui.CarDetailsScreen
 import com.example.feature.carList.ui.CarListScreen
+import com.example.feature.filter.ui.FilterScreen
 import com.example.feature.rentCar.presentation.RentCarViewModel
 import com.example.feature.rentCar.ui.RentCarScreen
 import com.example.feature.rentSuccess.presentation.RentSuccessViewModel
 import com.example.feature.rentSuccess.ui.RentSuccessScreen
+import com.example.shared.filter.Filter
 
 @Composable
 fun MainScreen() {
-    val backStack = rememberNavBackStack(Route.CarList)
+    val backStack = rememberNavBackStack(Route.CarList(null))
     val selectedTab = getSelectedTab(backStack.lastOrNull())
 
     Scaffold(
@@ -34,7 +36,7 @@ fun MainScreen() {
                     onItemClicked = {
                         when (it) {
                             NavigationOptions.CAR -> {
-                                backStack.clearAndAdd(Route.CarList)
+                                backStack.clearAndAdd(Route.CarList(null))
                             }
 
                             NavigationOptions.ORDERS -> {
@@ -55,10 +57,16 @@ fun MainScreen() {
         NavDisplay(
             backStack = backStack,
             entryProvider = entryProvider {
-                entry<Route.CarList> {
-                    CarListScreen(onItemClick = {
-                        backStack.add(Route.CarDetails(it))
-                    })
+                entry<Route.CarList> { route ->
+                    CarListScreen(
+                        onItemClick = {
+                            backStack.add(Route.CarDetails(it))
+                        },
+                        onFiltersClick = {
+                            backStack.clearAndAdd(Route.Filters(it))
+                        },
+                        filter = route.filter
+                    )
                 }
 
                 entry<Route.CarDetails> { route ->
@@ -108,7 +116,22 @@ fun MainScreen() {
                         rentSuccessViewModel = viewModel,
                         rent = route.rent,
                         onBackClick = {
-                            backStack.clearAndAdd(Route.CarList)
+                            backStack.clearAndAdd(Route.CarList(null))
+                        }
+                    )
+                }
+
+                entry<Route.Filters> { route ->
+                    FilterScreen(
+                        filter = route.filter,
+                        onBackClick = {
+                            backStack.clearAndAdd(Route.CarList(null))
+                        },
+                        onResetFilters = {
+                            backStack.clearAndAdd(Route.CarList(Filter()))
+                        },
+                        onApplyFilters = {
+                            backStack.clearAndAdd(Route.CarList(it))
                         }
                     )
                 }
