@@ -1,5 +1,8 @@
 package com.example.shared.rent.domain
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Rent(
     val id: String,
     val carInfo: CarInfo,
@@ -15,5 +18,4 @@ data class Rent(
     val birthDate: String,
     val email: String,
     val phone: String,
-    val comment: String,
 )

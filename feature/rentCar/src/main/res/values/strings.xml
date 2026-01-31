@@ -25,10 +25,21 @@
     <string name="total">Итого</string>
     <string name="form">Оформить</string>
 
+    <string name="pickup_location_validation">Не указано место получения</string>
+    <string name="return_location_validation">Не указано место возврата</string>
+    <string name="dates_validation">Укажите даты аренды</string>
+    <string name="first_name_validation">Укажите ваше имя</string>
+    <string name="last_name_validation">Укажите вашу фамилию</string>
+    <string name="phone_validation">Укажите ваш номер телефона</string>
+    <string name="email_validation">Укажите вашу электронную почту</string>
+    <string name="birth_date_validation">Укажите дату рождения в формате ДД.ММ.ГГГГ</string>
+
+
     <plurals name="numberOfDays">
         <item quantity="zero">%d дней</item>
         <item quantity="one">%d день</item>
         <item quantity="few">%d дня</item>
         <item quantity="many">%d дней</item>
+        <item quantity="other">%d дней</item>
     </plurals>
 </resources>

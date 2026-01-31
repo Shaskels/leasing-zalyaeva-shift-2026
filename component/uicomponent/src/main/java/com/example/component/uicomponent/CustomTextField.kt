@@ -40,7 +40,7 @@ fun CustomTextField(
         },
         singleLine = singleLine,
         minLines = minLines,
-        trailingIcon = if (errorText == null) trailingIcon else errorTrailingIcon,
+        trailingIcon = trailingIcon,
         visualTransformation = visualTransformation,
         textStyle = LeasingTheme.typography.paragraph16Regular,
         colors = OutlinedTextFieldDefaults.colors(
